@@ -1,0 +1,28 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": "dist/client",
+  "framework": null,
+  "build": {
+    "env": {
+      "NODE_OPTIONS": "--max-old-space-size=4096"
+    }
+  },
+  "functions": {
+    "api/server.js": {
+      "maxDuration": 30,
+      "memory": 1024,
+      "includeFiles": "dist/server/**"
+    }
+  },
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/server"
+    }
+  ]
+}
